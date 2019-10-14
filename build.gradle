@@ -55,3 +55,8 @@ run {
         classpath = files()
     }
 }
+
+
+run {
+    standardInput = System.in
+}
