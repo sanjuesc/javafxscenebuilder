@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.AutobusaKud">
+   <children>
+      <ComboBox fx:id="matxuratutakoa" layoutX="115.0" layoutY="100.0" prefWidth="150.0" />
+      <ComboBox fx:id="ordezkoa" layoutX="115.0" layoutY="202.0" prefWidth="150.0" />
+      <DatePicker fx:id="noiz" layoutX="323.0" layoutY="100.0" />
+      <Label layoutX="115.0" layoutY="81.0" text="Matxuratutakoa" />
+      <Label layoutX="323.0" layoutY="81.0" text="Noiz" />
+      <Label layoutX="115.0" layoutY="183.0" text="Ordezkoa" />
+      <Button layoutX="322.0" layoutY="202.0" mnemonicParsing="false" onAction="#onClick" text="Ordezkatu" />
+   </children>
+</AnchorPane>

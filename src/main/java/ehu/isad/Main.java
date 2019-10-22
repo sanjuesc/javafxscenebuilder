@@ -1,7 +1,7 @@
 package ehu.isad;
 
-import ehu.isad.controller.KautotuKud;
-import ehu.isad.controller.MainKud;
+import ehu.isad.controller.ui.KautotuKud;
+import ehu.isad.controller.ui.MainKud;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
