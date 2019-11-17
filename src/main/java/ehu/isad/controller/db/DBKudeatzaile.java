@@ -1,43 +1,45 @@
 package ehu.isad.controller.db;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.Statement;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.*;
-import java.util.Properties;
+
 
 public class DBKudeatzaile {
 
 	Connection conn = null;
 
-	private void conOpen() throws IOException {
-
-		Properties properties = null;
-		InputStream in = null;
-
+	private void conOpen() {
 		try {
-			in = this.getClass().getResourceAsStream("/setup.properties");
-			properties = new Properties();
-			properties.load(in);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			in.close();
-		}
 
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/", properties);
-			conn.setCatalog(properties.getProperty("dbname"));
+			String path=this.getClass().getResource("/ezarpenak.sqlite").getPath();
+			String url = "jdbc:sqlite:"+ path;
+			Class.forName("org.sqlite.JDBC").getConstructor().newInstance();
 
-		} catch (SQLException ex) {
-			// handle any errors
-			System.out.println("SQLException: " + ex.getMessage());
-			System.out.println("SQLState: " + ex.getSQLState());
-			System.out.println("VendorError: " + ex.getErrorCode());
-		} catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException | InstantiationException | NoSuchMethodException e) {
-			e.printStackTrace();
+			conn = (Connection) DriverManager.getConnection(url);
+			System.out.println("Database connection established");
+		} catch (Exception e) {
+			System.err.println("Cannot connect to database server");
 		}
+	}
+
+
+
+	private void conClose() {
+
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		System.out.println("Database connection terminated");
+
 	}
 
 	private ResultSet query(Statement s, String query) {
@@ -45,8 +47,7 @@ public class DBKudeatzaile {
 		ResultSet rs = null;
 
 		try {
-			s.executeQuery(query);
-			rs = s.getResultSet();
+			rs = s.executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -58,11 +59,8 @@ public class DBKudeatzaile {
 	private static DBKudeatzaile instantzia = new DBKudeatzaile();
 
 	private DBKudeatzaile() {
-		try {
-			this.conOpen();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.conOpen();
+
 	}
 
 	public static DBKudeatzaile getInstantzia() {
@@ -73,18 +71,22 @@ public class DBKudeatzaile {
 		int count = 0;
 		Statement s = null;
 		ResultSet rs = null;
+
 		try {
 			s = (Statement) conn.createStatement();
 			if (query.toLowerCase().indexOf("select") == 0) {
 				// select agindu bat
 				rs = this.query(s, query);
+
 			} else {
 				// update, delete, create agindu bat
 				count = s.executeUpdate(query);
+				System.out.println(count + " rows affected");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 		return rs;
 	}
 }
