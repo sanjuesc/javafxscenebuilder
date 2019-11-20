@@ -13,6 +13,6 @@
       <TextArea fx:id="ezarpenak" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <Button mnemonicParsing="false" text="OK" BorderPane.alignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#onClick" text="OK" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>

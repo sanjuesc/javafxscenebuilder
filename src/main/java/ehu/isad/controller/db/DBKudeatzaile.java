@@ -14,15 +14,14 @@ public class DBKudeatzaile {
 
 	private void conOpen() {
 		try {
-
-			String path=this.getClass().getResource("/ezarpenak.sqlite").getPath();
-			String url = "jdbc:sqlite:"+ path;
+			String url = "jdbc:sqlite::resource:ezarpenak.sqlite";
 			Class.forName("org.sqlite.JDBC").getConstructor().newInstance();
 
 			conn = (Connection) DriverManager.getConnection(url);
+			conn.setAutoCommit(false);
 			System.out.println("Database connection established");
 		} catch (Exception e) {
-			System.err.println("Cannot connect to database server");
+			System.err.println("Cannot connect to database server " + e);
 		}
 	}
 
@@ -48,6 +47,7 @@ public class DBKudeatzaile {
 
 		try {
 			rs = s.executeQuery(query);
+			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
