@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.Properties;
 
-public class DBKud {
+public class DBKudSQLite {
 
 	Connection conn = null;
 
@@ -26,18 +26,37 @@ public class DBKud {
 		}
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/", properties);
+
+			//String url = "jdbc:sqlite::resource:eurobisioa.db";
+			//Class.forName("org.sqlite.JDBC").getConstructor().newInstance();
+			//conn = (Connection) DriverManager.getConnection(url);
+
+			conn = DriverManager.getConnection("jdbc:sqlite:"+ properties.getProperty("dbpath"));
 			conn.setCatalog(properties.getProperty("dbname"));
+			System.out.println("Database connection established");
 
 		} catch (SQLException ex) {
 			// handle any errors
 			System.out.println("SQLException: " + ex.getMessage());
 			System.out.println("SQLState: " + ex.getSQLState());
 			System.out.println("VendorError: " + ex.getErrorCode());
-		} catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException | InstantiationException | NoSuchMethodException e) {
-			e.printStackTrace();
 		}
+	}
+
+
+
+	private void conClose() {
+
+		if (conn != null)
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		System.out.println("Database connection terminated");
+
 	}
 
 	private ResultSet query(Statement s, String query) {
@@ -45,8 +64,7 @@ public class DBKud {
 		ResultSet rs = null;
 
 		try {
-			s.executeQuery(query);
-			rs = s.getResultSet();
+			rs = s.executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -55,36 +73,41 @@ public class DBKud {
 	}
 
 	// singleton patroia
-	private static DBKud instance = new DBKud();
+	private static DBKudSQLite instantzia = new DBKudSQLite();
 
-	private DBKud() {
+	private DBKudSQLite() {
 		try {
 			this.conOpen();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
-	public static DBKud getInstance() {
-		return instance;
+	public static DBKudSQLite getInstantzia() {
+		return instantzia;
 	}
 
 	public ResultSet execSQL(String query) {
 		int count = 0;
 		Statement s = null;
 		ResultSet rs = null;
+
 		try {
 			s = (Statement) conn.createStatement();
 			if (query.toLowerCase().indexOf("select") == 0) {
 				// select agindu bat
 				rs = this.query(s, query);
+
 			} else {
 				// update, delete, create agindu bat
 				count = s.executeUpdate(query);
+				System.out.println(count + " rows affected");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 		return rs;
 	}
 }

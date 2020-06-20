@@ -36,13 +36,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
 
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+    // compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+    compile group:'org.xerial', name:'sqlite-jdbc', version:'3.8.11.2'
+
 }
 
 
 
 // Define the main class for the application
-mainClassName = "$moduleName/ehu.isad.Autobusak"
+mainClassName = "$moduleName/ehu.isad.Webguneak"
 
 
 def newArgs = [ '--add-exports','java.desktop/com.apple.eawt=ALL-UNNAMED',]

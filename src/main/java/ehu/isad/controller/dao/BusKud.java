@@ -1,6 +1,6 @@
 package ehu.isad.controller.dao;
 
-import ehu.isad.controller.db.DBKud;
+import ehu.isad.controller.db.DBKudMySQL;
 import ehu.isad.model.Autobusa;
 
 import java.sql.ResultSet;
@@ -12,7 +12,7 @@ import java.util.List;
 public class BusKud {
 
   private static BusKud instance;
-  private DBKud dbkud = DBKud.getInstance();
+  private DBKudMySQL dbkud = DBKudMySQL.getInstance();
 
   public static BusKud getInstance(){
     if (instance == null) {
