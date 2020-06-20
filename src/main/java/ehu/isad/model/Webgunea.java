@@ -1,16 +1,17 @@
 package ehu.isad.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class Webgunea {
 
     private String url;
     private String cms;
     private String version;
-    private Long lastupdated;
+    private LocalDate lastupdated;
     private String screenshot;
 
-    public Webgunea(String url, String cms, String version, Long lastupdated, String screenshot) {
+    public Webgunea(String url, String cms, String version, LocalDate lastupdated, String screenshot) {
         this.url = url;
         this.cms = cms;
         this.version = version;
@@ -42,11 +43,11 @@ public class Webgunea {
         this.version = version;
     }
 
-    public Long getLastupdated() {
+    public LocalDate getLastupdated() {
         return lastupdated;
     }
 
-    public void setLastupdated(Long lastupdated) {
+    public void setLastupdated(LocalDate lastupdated) {
         this.lastupdated = lastupdated;
     }
 

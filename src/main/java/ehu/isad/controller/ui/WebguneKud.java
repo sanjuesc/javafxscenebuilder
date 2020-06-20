@@ -20,6 +20,7 @@ import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -41,7 +42,7 @@ public class WebguneKud implements Initializable {
   private TableColumn<Webgunea, String> version;
 
   @FXML
-  private TableColumn<Webgunea, Long> lastupdated;
+  private TableColumn<Webgunea, LocalDate> lastupdated;
 
   @FXML
   private TableColumn<Webgunea, String> screenshot;
@@ -63,7 +64,7 @@ public class WebguneKud implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     tbData.setEditable(true);
     //make sure the property value factory should be exactly same as the e.g getStudentId from your model class
-    url.setCellValueFactory(new PropertyValueFactory<>("cms"));
+    url.setCellValueFactory(new PropertyValueFactory<>("url"));
     cms.setCellValueFactory(new PropertyValueFactory<>("cms"));
     version.setCellValueFactory(new PropertyValueFactory<>("version"));
     lastupdated.setCellValueFactory(new PropertyValueFactory<>("lastupdated"));
@@ -72,17 +73,19 @@ public class WebguneKud implements Initializable {
 //
 //    Callback<TableColumn<Webgunea, Integer>, TableCell<Webgunea, Integer>> defaultTextFieldCellFactory
 //            = TextFieldTableCell.<Webgunea, Integer>forTableColumn(new IntegerStringConverter());
-    lastupdated.setCellFactory((TableColumn<Webgunea, Long> column) -> {
-      return new TableCell<Webgunea, Long>() {
-        @Override
-        protected void updateItem(Long item, boolean empty) {
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    lastupdated.setCellFactory((TableColumn<Webgunea, LocalDate> column) -> {
+      return new TableCell<Webgunea, LocalDate>() {
+        @Override
+        protected void updateItem(LocalDate item, boolean empty) {
           super.updateItem(item, empty);
           if (item == null || empty) {
             setText(null);
           }
           else {
-            setText(Instant.ofEpochSecond(    item ).toString());
+            setText(formatter.format(item));
           }
         }
       };

@@ -6,6 +6,9 @@ import ehu.isad.model.Webgunea;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +39,13 @@ public class DatuakKud {
         Long lastupdated =  rs.getLong ("lastupdated");
         String screenshot = rs.getString("screenshot");
 
-        emaitza.add(new Webgunea(url, cms, version, lastupdated, screenshot));
+        // https://stackoverflow.com/a/35186993/243532
+        LocalDate date =
+                Instant.ofEpochSecond(lastupdated)
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+
+        emaitza.add(new Webgunea(url, cms, version, date, screenshot));
       }
 
     } catch (SQLException ex) {
