@@ -76,21 +76,29 @@ public class WebguneKud implements Initializable {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    lastupdated.setCellFactory((TableColumn<Webgunea, LocalDate> column) -> {
-      return new TableCell<Webgunea, LocalDate>() {
-        @Override
-        protected void updateItem(LocalDate item, boolean empty) {
-          super.updateItem(item, empty);
-          if (item == null || empty) {
-            setText(null);
-          }
-          else {
-            setText(formatter.format(item));
-          }
-        }
-      };
-    });
+//    lastupdated.setCellFactory((TableColumn<Webgunea, LocalDate> column) -> {
+//      return new TableCell<Webgunea, LocalDate>() {
+//        @Override
+//        protected void updateItem(LocalDate item, boolean empty) {
+//          super.updateItem(item, empty);
+//          if (item == null || empty) {
+//            setText(null);
+//          }
+//          else {
+//            setText(formatter.format(item));
+//          }
+//        }
+//      };
+//    });
 
+
+    lastupdated.setCellFactory(new Callback<TableColumn<Webgunea, LocalDate>, TableCell<Webgunea, LocalDate>>() {
+      @Override
+      public TableCell<Webgunea, LocalDate> call(TableColumn<Webgunea, LocalDate> p) {
+        DatePickerCell datePick = new DatePickerCell(taulaModels);
+        return datePick;
+      }
+    });
 
 //    lastupdated.setCellFactory(col -> {
 //      TableCell<Webgunea, Integer> cell = defaultTextFieldCellFactory.call(col);
