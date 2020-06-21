@@ -64,6 +64,11 @@ public class WebguneKud implements Initializable {
     @FXML
     public void onClick(ActionEvent actionEvent) {
         System.out.println("Clicked");
+        // check the table's selected item and get selected item
+        if (tbData.getSelectionModel().getSelectedItem() != null) {
+            Webgunea web = tbData.getSelectionModel().getSelectedItem();
+            System.out.println(web.getUrl());
+        }
     }
 
     @Override
@@ -104,8 +109,8 @@ public class WebguneKud implements Initializable {
                 public void updateItem(Image image, boolean empty) {
                     if (image != null && !empty) {
                         final ImageView imageview = new ImageView();
-                        imageview.setFitHeight(25);
-                        imageview.setFitWidth(25);
+                        imageview.setFitHeight(100);
+                        imageview.setFitWidth(100);
                         imageview.setImage(image);
                         setGraphic(imageview);
                         setAlignment(Pos.CENTER);

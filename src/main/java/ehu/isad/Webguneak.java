@@ -30,7 +30,14 @@ public class Webguneak extends Application {
     pantailakKargatu();
 
     stage.setTitle("Webguneak Kudeatu");
-    stage.setScene(new Scene(webguneUI));
+
+    Scene scene = new Scene(webguneUI);
+    /**********************************************/
+    /********* Setting the css style file *******/
+    /**********************************************/
+    scene.getStylesheets().add("css/styles.css");
+
+    stage.setScene(scene);
     stage.show();
   }
 }
