@@ -1,5 +1,7 @@
 package ehu.isad.controller.db;
 
+import ehu.isad.utils.Utils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -12,18 +14,7 @@ public class DBKudSQLite {
 
 	private void conOpen() throws IOException {
 
-		Properties properties = null;
-		InputStream in = null;
-
-		try {
-			in = this.getClass().getResourceAsStream("/setup.properties");
-			properties = new Properties();
-			properties.load(in);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			in.close();
-		}
+		Properties properties = Utils.loadProperties();
 
 		try {
 

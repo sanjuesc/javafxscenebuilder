@@ -4,24 +4,30 @@ import ehu.isad.Webguneak;
 import ehu.isad.controller.dao.BusKud;
 import ehu.isad.controller.dao.DatuakKud;
 import ehu.isad.model.Webgunea;
+import ehu.isad.utils.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class WebguneKud implements Initializable {
@@ -45,7 +51,7 @@ public class WebguneKud implements Initializable {
   private TableColumn<Webgunea, LocalDate> lastupdated;
 
   @FXML
-  private TableColumn<Webgunea, String> screenshot;
+  private TableColumn<Webgunea, Image> screenshot;
 
   // add your data here from any source
   private ObservableList<Webgunea> taulaModels = FXCollections.observableArrayList(
@@ -104,6 +110,26 @@ public class WebguneKud implements Initializable {
 //      TableCell<Webgunea, Integer> cell = defaultTextFieldCellFactory.call(col);
 //      return cell ;
 //    });
+
+
+    screenshot.setCellValueFactory(new PropertyValueFactory<Webgunea, Image>("screenshot"));
+
+    screenshot.setCellFactory(p -> new TableCell<>() {
+      public void updateItem(Image image, boolean empty) {
+        if (image != null && !empty){
+          final ImageView imageview = new ImageView();
+          imageview.setFitHeight(25);
+          imageview.setFitWidth(25);
+          imageview.setImage(image);
+          setGraphic(imageview);
+          setAlignment(Pos.CENTER);
+          // tbData.refresh();
+        }else{
+          setGraphic(null);
+          setText(null);
+        }
+      };
+    });
 
     //add your data to the table here.
     tbData.setItems(taulaModels);

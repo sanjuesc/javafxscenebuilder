@@ -1,7 +1,12 @@
 package ehu.isad.model;
 
-import java.sql.Timestamp;
+import ehu.isad.utils.Utils;
+import javafx.scene.image.Image;
+
+import java.io.File;
+import java.net.MalformedURLException;
 import java.time.LocalDate;
+import java.util.Properties;
 
 public class Webgunea {
 
@@ -9,14 +14,21 @@ public class Webgunea {
     private String cms;
     private String version;
     private LocalDate lastupdated;
-    private String screenshot;
+    private Image screenshot;
+
+    private Properties properties = Utils.loadProperties();
 
     public Webgunea(String url, String cms, String version, LocalDate lastupdated, String screenshot) {
         this.url = url;
         this.cms = cms;
         this.version = version;
         this.lastupdated = lastupdated;
-        this.screenshot = screenshot;
+        String path = properties.getProperty("imagespath") + screenshot;
+        try {
+            this.screenshot = new Image(new File(path).toURI().toURL().toExternalForm());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getUrl() {
@@ -51,11 +63,11 @@ public class Webgunea {
         this.lastupdated = lastupdated;
     }
 
-    public String getScreenshot() {
+    public Image getScreenshot() {
         return screenshot;
     }
 
-    public void setScreenshot(String screenshot) {
+    public void setScreenshot(Image screenshot) {
         this.screenshot = screenshot;
     }
 
