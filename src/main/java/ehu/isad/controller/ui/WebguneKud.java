@@ -32,107 +32,95 @@ import java.util.ResourceBundle;
 
 public class WebguneKud implements Initializable {
 
-  // Reference to the main application.
-  private Webguneak mainApp;
+    // Reference to the main application.
+    private Webguneak mainApp;
 
-  @FXML
-  private TableView<Webgunea> tbData;
+    @FXML
+    private TableView<Webgunea> tbData;
 
-  @FXML
-  private TableColumn<Webgunea, String> url;
+    @FXML
+    private TableColumn<Webgunea, String> url;
 
-  @FXML
-  private TableColumn<Webgunea, String> cms;
+    @FXML
+    private TableColumn<Webgunea, String> cms;
 
-  @FXML
-  private TableColumn<Webgunea, String> version;
+    @FXML
+    private TableColumn<Webgunea, String> version;
 
-  @FXML
-  private TableColumn<Webgunea, LocalDate> lastupdated;
+    @FXML
+    private TableColumn<Webgunea, LocalDate> lastupdated;
 
-  @FXML
-  private TableColumn<Webgunea, Image> screenshot;
+    @FXML
+    private TableColumn<Webgunea, Image> screenshot;
 
-  // add your data here from any source
-  private ObservableList<Webgunea> taulaModels = FXCollections.observableArrayList(
-          DatuakKud.getInstance().getWebguneak());
+    // add your data here from any source
+    private ObservableList<Webgunea> taulaModels = FXCollections.observableArrayList(
+            DatuakKud.getInstance().getWebguneak());
 
-  public void setMainApp(Webguneak main) {
-    this.mainApp = mainApp;
-  }
+    public void setMainApp(Webguneak main) {
+        this.mainApp = mainApp;
+    }
 
-  @FXML
-  public void onClick(ActionEvent actionEvent) {
-    System.out.println("Clicked");
-  }
+    @FXML
+    public void onClick(ActionEvent actionEvent) {
+        System.out.println("Clicked");
+    }
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    tbData.setEditable(true);
-    //make sure the property value factory should be exactly same as the e.g getStudentId from your model class
-    url.setCellValueFactory(new PropertyValueFactory<>("url"));
-    cms.setCellValueFactory(new PropertyValueFactory<>("cms"));
-    version.setCellValueFactory(new PropertyValueFactory<>("version"));
-    lastupdated.setCellValueFactory(new PropertyValueFactory<>("lastupdated"));
-    screenshot.setCellValueFactory(new PropertyValueFactory<>("screenshot"));
-
-//
-//    Callback<TableColumn<Webgunea, Integer>, TableCell<Webgunea, Integer>> defaultTextFieldCellFactory
-//            = TextFieldTableCell.<Webgunea, Integer>forTableColumn(new IntegerStringConverter());
-
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-//    lastupdated.setCellFactory((TableColumn<Webgunea, LocalDate> column) -> {
-//      return new TableCell<Webgunea, LocalDate>() {
-//        @Override
-//        protected void updateItem(LocalDate item, boolean empty) {
-//          super.updateItem(item, empty);
-//          if (item == null || empty) {
-//            setText(null);
-//          }
-//          else {
-//            setText(formatter.format(item));
-//          }
-//        }
-//      };
-//    });
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        tbData.setEditable(true);
+        //make sure the property value factory should be exactly same as the e.g getStudentId from your model class
+        url.setCellValueFactory(new PropertyValueFactory<>("url"));
+        cms.setCellValueFactory(new PropertyValueFactory<>("cms"));
+        version.setCellValueFactory(new PropertyValueFactory<>("version"));
+        lastupdated.setCellValueFactory(new PropertyValueFactory<>("lastupdated"));
+        screenshot.setCellValueFactory(new PropertyValueFactory<>("screenshot"));
 
 
-    lastupdated.setCellFactory(new Callback<TableColumn<Webgunea, LocalDate>, TableCell<Webgunea, LocalDate>>() {
-      @Override
-      public TableCell<Webgunea, LocalDate> call(TableColumn<Webgunea, LocalDate> p) {
-        DatePickerCell datePick = new DatePickerCell(taulaModels);
-        return datePick;
-      }
-    });
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-//    lastupdated.setCellFactory(col -> {
-//      TableCell<Webgunea, Integer> cell = defaultTextFieldCellFactory.call(col);
-//      return cell ;
-//    });
+        lastupdated.setCellFactory(new Callback<TableColumn<Webgunea, LocalDate>, TableCell<Webgunea, LocalDate>>() {
+            @Override
+            public TableCell<Webgunea, LocalDate> call(TableColumn<Webgunea, LocalDate> p) {
+                DatePickerCell datePick = new DatePickerCell(taulaModels);
+                return datePick;
+            }
+        });
 
 
-    screenshot.setCellValueFactory(new PropertyValueFactory<Webgunea, Image>("screenshot"));
+        Callback<TableColumn<Webgunea, String>, TableCell<Webgunea, String>> defaultTextFieldCellFactory
+                = TextFieldTableCell.<Webgunea>forTableColumn();
 
-    screenshot.setCellFactory(p -> new TableCell<>() {
-      public void updateItem(Image image, boolean empty) {
-        if (image != null && !empty){
-          final ImageView imageview = new ImageView();
-          imageview.setFitHeight(25);
-          imageview.setFitWidth(25);
-          imageview.setImage(image);
-          setGraphic(imageview);
-          setAlignment(Pos.CENTER);
-          // tbData.refresh();
-        }else{
-          setGraphic(null);
-          setText(null);
+        url.setCellFactory(col -> {
+                    TableCell<Webgunea, String> cell = defaultTextFieldCellFactory.call(col);
+                    cell.setEditable(true);
+                    return cell;
+                });
+
+
+            screenshot.setCellValueFactory(new PropertyValueFactory<Webgunea, Image>("screenshot"));
+
+            screenshot.setCellFactory(p -> new TableCell<>() {
+                public void updateItem(Image image, boolean empty) {
+                    if (image != null && !empty) {
+                        final ImageView imageview = new ImageView();
+                        imageview.setFitHeight(25);
+                        imageview.setFitWidth(25);
+                        imageview.setImage(image);
+                        setGraphic(imageview);
+                        setAlignment(Pos.CENTER);
+                        // tbData.refresh();
+                    } else {
+                        setGraphic(null);
+                        setText(null);
+                    }
+                }
+
+                ;
+            });
+
+            //add your data to the table here.
+            tbData.setItems(taulaModels);
         }
-      };
-    });
 
-    //add your data to the table here.
-    tbData.setItems(taulaModels);
-  }
-
-}
+    }

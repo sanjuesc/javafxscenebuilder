@@ -35,7 +35,6 @@ public class DatuakKud {
         String url = rs.getString("url");
         String cms = rs.getString("cms");
         String version = rs.getString("version");
-        // Date lastupdated =  new Date(rs.getInt("lastupdated"));
         Long lastupdated =  rs.getLong ("lastupdated");
         String screenshot = rs.getString("screenshot");
 
