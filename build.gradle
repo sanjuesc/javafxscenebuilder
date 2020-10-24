@@ -5,23 +5,37 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * User Manual available at https://docs.gradle.org/5.4.1/userguide/tutorial_java_projects.html
  */
-
 plugins {
-    // Apply the java plugin to add support for Java
     id 'java'
-
-    // Apply the application plugin to add support for building an application
     id 'application'
-
-    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+version = '0.0.1'
+group = 'ehu.isad'
+
+java {
+    modularity.inferModulePath.set(true)
+}
+
+application {
+    mainModule = 'javafx' // name defined in module-info.java
+    mainClass = 'ehu.isad.Main'
+}
+
+
+
+// ext.moduleName = 'gradlejavafxhelloworld'
+mainClassName = "$moduleName/ehu.isad.Main"
+
 
 javafx {
-
-    modules = ['javafx.controls', 'javafx.fxml']
-    version = '11.0.2'
+    version = "12"
+    modules = [ 'javafx.graphics', 'javafx.fxml', 'javafx.controls']
 }
-
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
@@ -35,25 +49,10 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 
-    // compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
-
-   //  compile 'com.google.apis:google-api-services-books:v1-rev20191103-1.30.3'
-
-    // https://mvnrepository.com/artifact/org.jsoup/jsoup
-    compile group: 'org.jsoup', name: 'jsoup', version: '1.12.1'
-
-// https://mvnrepository.com/artifact/com.google.code.gson/gson
-    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
-
-
     // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
 
 }
-
-
-// Define the main class for the application
-mainClassName = "$moduleName/ehu.isad.MainBook"
 
 
 def newArgs = [ '--add-exports','java.desktop/com.apple.eawt=ALL-UNNAMED',]
