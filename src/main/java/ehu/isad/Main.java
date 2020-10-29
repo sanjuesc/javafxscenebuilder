@@ -1,28 +1,31 @@
 package ehu.isad;
 
-import ehu.isad.controller.ui.NagusiaKud;
-import ehu.isad.controller.ui.EzarpenakKud;
-import ehu.isad.controller.ui.StudentsController;
+import ehu.isad.controller.ui.*;
+import ehu.isad.model.Herrialde;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Main extends Application {
 
   private Parent nagusiaUI;
-  private Parent ezarpenakUI;
-  private Parent taulakUI;
+  private Parent herrialdeUI;
+  private Parent bozkatuUI;
+  private Parent bozkatuDuUI;
 
 
   private Stage stage;
 
   private NagusiaKud nagusiaKud;
-  private EzarpenakKud ezarpenakKud;
-  private StudentsController studentController;
+  private HerrialdeKud herrialdeKud;
+  private BozkatuKud bozkatuKud;
+  private bozkatuDuKud bozkatuduKud;
 
 
 
@@ -32,8 +35,8 @@ public class Main extends Application {
     stage = primaryStage;
     pantailakKargatu();
 
-    stage.setTitle("Ezarpenak lortu");
-    stage.setScene(new Scene(nagusiaUI, 450, 275));
+    stage.setTitle("Eurobisioa");
+    stage.setScene(new Scene(nagusiaUI, 600, 400));
     stage.show();
   }
 
@@ -44,14 +47,20 @@ public class Main extends Application {
     nagusiaKud = loaderKautotu.getController();
     nagusiaKud.setMainApp(this);
 
-    /*FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/EzarpenakUI.fxml"));
-    ezarpenakUI = (Parent) loaderMain.load();
-    ezarpenakKud = loaderMain.getController();
-    ezarpenakKud.setMainApp(this);*/
-    FXMLLoader loaderTaula = new FXMLLoader(getClass().getResource("/TaulaUI.fxml"));
-    taulakUI = (Parent) loaderTaula.load();
-    studentController = loaderTaula.getController();
-    studentController.setMainApp(this);
+    FXMLLoader loaderHerrialde = new FXMLLoader(getClass().getResource("/Herrialde.fxml"));
+    herrialdeUI = (Parent) loaderHerrialde.load();
+    herrialdeKud = loaderHerrialde.getController();
+    herrialdeKud.setMainApp(this);
+
+    FXMLLoader loaderBozkatu = new FXMLLoader(getClass().getResource("/Bozkatu.fxml"));
+    bozkatuUI = (Parent) loaderBozkatu.load();
+    bozkatuKud = loaderBozkatu.getController();
+    bozkatuKud.setMainApp(this);
+
+    FXMLLoader loaderBozkatuDu = new FXMLLoader(getClass().getResource("/BozkatuDu.fxml"));
+    bozkatuDuUI = (Parent) loaderBozkatuDu.load();
+    bozkatuduKud = loaderBozkatuDu.getController();
+    bozkatuduKud.setMainApp(this);
   }
 
 
@@ -59,14 +68,22 @@ public class Main extends Application {
     launch(args);
   }
 
-  public void ezarpenakErakutsi() {
-    stage.setScene(new Scene(ezarpenakUI));
+  public void ezarpenakErakutsi() throws SQLException {
+    stage.setScene(new Scene(herrialdeUI));
     stage.show();
-    ezarpenakKud.getEzarpenak();
+    herrialdeKud.getEzarpenak();
   }
 
-  public void taulaErakutsi(){
-    stage.setScene(new Scene(taulakUI));
+  public void bozkatuErakutsi(ObservableList<Herrialde> herrialdeak, Herrialde nork){
+    bozkatuKud.setHerrialdeak(herrialdeak, nork);
+    stage.setScene(new Scene(bozkatuUI));
+    stage.show();
+
+  }
+  public void BozkatuduErakutsi(Herrialde herrialdea) {
+    bozkatuduKud.setHerrialdeIzena(herrialdea);
+    stage.setScene(new Scene(bozkatuDuUI));
     stage.show();
   }
+
 }
