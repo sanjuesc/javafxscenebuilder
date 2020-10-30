@@ -27,6 +27,11 @@ public class Main extends Application {
   private BozkatuKud bozkatuKud;
   private bozkatuDuKud bozkatuduKud;
 
+  private Scene nagusiaScene;
+  private Scene herrialdeScene;
+  private Scene bozkatuScene;
+  private Scene bozkatuduScene;
+
 
 
   @Override
@@ -35,8 +40,15 @@ public class Main extends Application {
     stage = primaryStage;
     pantailakKargatu();
 
+    nagusiaScene = new Scene(nagusiaUI,600,400);
+    herrialdeScene = new Scene(herrialdeUI,600,400);
+    bozkatuScene = new Scene(bozkatuUI,600,400);
+    bozkatuduScene = new Scene(bozkatuDuUI,600,400);
+
+
+
     stage.setTitle("Eurobisioa");
-    stage.setScene(new Scene(nagusiaUI, 600, 400));
+    stage.setScene(nagusiaScene);
     stage.show();
   }
 
@@ -69,20 +81,20 @@ public class Main extends Application {
   }
 
   public void ezarpenakErakutsi() throws SQLException {
-    stage.setScene(new Scene(herrialdeUI));
+    stage.setScene(herrialdeScene);
     stage.show();
     herrialdeKud.getEzarpenak();
   }
 
   public void bozkatuErakutsi(ObservableList<Herrialde> herrialdeak, Herrialde nork){
     bozkatuKud.setHerrialdeak(herrialdeak, nork);
-    stage.setScene(new Scene(bozkatuUI));
+    stage.setScene(bozkatuScene);
     stage.show();
 
   }
   public void BozkatuduErakutsi(Herrialde herrialdea) {
     bozkatuduKud.setHerrialdeIzena(herrialdea);
-    stage.setScene(new Scene(bozkatuDuUI));
+    stage.setScene(bozkatuduScene);
     stage.show();
   }
 
