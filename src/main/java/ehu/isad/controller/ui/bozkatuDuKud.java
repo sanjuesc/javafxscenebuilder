@@ -38,13 +38,15 @@ public class bozkatuDuKud implements Initializable {
     }
 
     public void setHerrialdeIzena(Herrialde herrialdea) {
+        Image banderaImage= new Image("/bihotz"+herrialdea.getIzena().toLowerCase()+".png");
+        banderaBihotz.setImage(banderaImage);
         textId.setText(herrialdea.getIzena()+ "k jada banatu ditu bere puntuak");
 
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Image image = new Image("/eurovision.png");
-        eurobisioa.setImage(image);
+        Image euroImage = new Image("/eurovision.png");
+        eurobisioa.setImage(euroImage);
     }
 
 }

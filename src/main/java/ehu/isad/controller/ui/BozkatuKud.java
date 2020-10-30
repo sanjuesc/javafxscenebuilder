@@ -5,15 +5,16 @@ import java.util.ResourceBundle;
 
 import ehu.isad.Main;
 import ehu.isad.model.Herrialde;
-import ehu.isad.model.StudentsModel;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+
 
 public class BozkatuKud {
 
@@ -30,12 +31,12 @@ public class BozkatuKud {
     private TableColumn<Herrialde, String> Abestia;
 
     @FXML
-    private TableColumn<Herrialde, Integer> Puntuak;
+    private TableColumn<Herrialde, String> Puntuak;
 
     @FXML
     private TableColumn<Herrialde, ImageView> argazkiId;
 
-
+    private int ematekoPuntuak;
     private Main main;
     private Herrialde nork;
     private ObservableList<Herrialde> herrialdeak;
@@ -52,14 +53,22 @@ public class BozkatuKud {
 
     @FXML
     void initialize() {
+        tbData.setEditable(true);
         Herrialdea.setCellValueFactory(new PropertyValueFactory<>("izena"));
         Artista.setCellValueFactory(new PropertyValueFactory<>("artista"));
         Abestia.setCellValueFactory(new PropertyValueFactory<>("abestia"));
-        Puntuak.setCellValueFactory(new PropertyValueFactory<>("puntuazioa"));
+        Puntuak.setCellValueFactory(c-> new SimpleStringProperty("0"));
+        Puntuak.setCellFactory(TextFieldTableCell.forTableColumn());
+        Puntuak.setOnEditCommit(data -> {
+            if(Integer.parseInt(data.getNewValue())>ematekoPuntuak){
+                //aldatu balioa 0-ra
+            }
+        });
         //argazkiId.setCellValueFactory(new PropertyValueFactory<>("bandera"));
     }
 
     public void setHerrialdeak(ObservableList<Herrialde> pLista, Herrialde pHerrialde){
+        ematekoPuntuak=10;
         nork=pHerrialde;
         herrialdeak=pLista;
         tbData.setItems(herrialdeak);

@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.NagusiaKud">
    <children>
-      <Button fx:id="kautotuBotoia" layoutX="265.0" layoutY="324.0" mnemonicParsing="false" onAction="#onClick" text="Bozkatu" />
-      <ImageView fx:id="imageId" fitHeight="212.0" fitWidth="394.0" layoutX="104.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="kautotuBotoia" layoutX="265.0" layoutY="310.0" mnemonicParsing="false" onAction="#onClick" text="Bozkatu" />
+      <ImageView fx:id="imageId" fitHeight="258.0" fitWidth="557.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
