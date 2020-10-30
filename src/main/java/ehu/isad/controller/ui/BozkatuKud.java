@@ -57,12 +57,19 @@ public class BozkatuKud {
         Herrialdea.setCellValueFactory(new PropertyValueFactory<>("izena"));
         Artista.setCellValueFactory(new PropertyValueFactory<>("artista"));
         Abestia.setCellValueFactory(new PropertyValueFactory<>("abestia"));
-        Puntuak.setCellValueFactory(c-> new SimpleStringProperty("0"));
+        Puntuak.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getJasotakoPunt())));
+
         Puntuak.setCellFactory(TextFieldTableCell.forTableColumn());
         Puntuak.setOnEditCommit(data -> {
-            if(Integer.parseInt(data.getNewValue())>ematekoPuntuak){
-                //aldatu balioa 0-ra
+            Integer zenbat = 0;
+            if(!data.getNewValue().equals("")&& Integer.parseInt(data.getNewValue())<=(ematekoPuntuak+data.getRowValue().getJasotakoPunt())){
+                zenbat=Integer.parseInt(data.getNewValue());
             }
+            ematekoPuntuak=ematekoPuntuak+data.getRowValue().getJasotakoPunt()-zenbat;
+            data.getRowValue().setJasotakoPunt(zenbat);
+            tbData.refresh();
+
+
         });
         //argazkiId.setCellValueFactory(new PropertyValueFactory<>("bandera"));
     }

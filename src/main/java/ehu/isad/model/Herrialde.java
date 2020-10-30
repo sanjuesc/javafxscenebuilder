@@ -12,6 +12,7 @@ public class Herrialde {
     private String abestia;
     private int puntuazioa;
     private ImageView bandera;
+    private int jasotakoPunt;
 
     public String getIzena() {
         return izena;
@@ -41,6 +42,14 @@ public class Herrialde {
         return puntuazioa;
     }
 
+    public int getJasotakoPunt() {
+        return jasotakoPunt;
+    }
+
+    public void setJasotakoPunt(int jasotakoPunt) {
+        this.jasotakoPunt = jasotakoPunt;
+    }
+
     public void setPuntuazioa(int puntuazioa) {
         this.puntuazioa = puntuazioa;
     }
@@ -52,6 +61,7 @@ public class Herrialde {
         artista=pArtista;
         abestia=pAbestia;
         puntuazioa=pPuntuazioa;
+        jasotakoPunt=0;
     }
     @Override
     public String toString(){
