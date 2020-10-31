@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 
 
 public class BozkatuKud {
@@ -40,11 +41,12 @@ public class BozkatuKud {
     private Main main;
     private Herrialde nork;
     private ObservableList<Herrialde> herrialdeak;
-    @FXML
-    private ResourceBundle resources;
 
     @FXML
-    private URL location;
+    private Text textuId;
+
+    @FXML
+    private Text zenbatId;
 
     @FXML
     void bozkaketaGorde(ActionEvent event) {
@@ -67,6 +69,7 @@ public class BozkatuKud {
             }
             ematekoPuntuak=ematekoPuntuak+data.getRowValue().getJasotakoPunt()-zenbat;
             data.getRowValue().setJasotakoPunt(zenbat);
+            zenbatId.setText(String.valueOf(ematekoPuntuak));
             tbData.refresh();
 
 
@@ -75,7 +78,8 @@ public class BozkatuKud {
     }
 
     public void setHerrialdeak(ObservableList<Herrialde> pLista, Herrialde pHerrialde){
-        ematekoPuntuak=10;
+        ematekoPuntuak=5;
+        zenbatId.setText(String.valueOf(ematekoPuntuak));
         nork=pHerrialde;
         herrialdeak=pLista;
         tbData.setItems(herrialdeak);

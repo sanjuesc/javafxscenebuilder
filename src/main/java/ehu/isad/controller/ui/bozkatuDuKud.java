@@ -1,6 +1,7 @@
 package ehu.isad.controller.ui;
 
 import ehu.isad.Main;
+import ehu.isad.controller.db.BozkatuDuDB;
 import ehu.isad.model.Herrialde;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,8 +38,9 @@ public class bozkatuDuKud implements Initializable {
 
     }
 
-    public void setHerrialdeIzena(Herrialde herrialdea) {
-        Image banderaImage= new Image("/bihotz"+herrialdea.getIzena().toLowerCase()+".png");
+    public void setHerrialdeIzena(Herrialde herrialdea) throws SQLException {
+        String banderaIzena=BozkatuDuDB.getInstantzia().lortuBandera(herrialdea);
+        Image banderaImage= new Image("/bihotz"+banderaIzena+".png");
         banderaBihotz.setImage(banderaImage);
         textId.setText(herrialdea.getIzena()+ "k jada banatu ditu bere puntuak");
 

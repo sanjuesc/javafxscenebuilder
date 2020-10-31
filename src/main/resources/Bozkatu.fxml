@@ -3,12 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.BozkatuKud">
-   <bottom>
-      <Button mnemonicParsing="false" onAction="#bozkaketaGorde" text="BozkaketaGorde" BorderPane.alignment="CENTER" />
-   </bottom>
    <center>
       <TableView fx:id="tbData" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
@@ -23,4 +22,13 @@
          </columnResizePolicy>
       </TableView>
    </center>
+   <bottom>
+      <AnchorPane prefHeight="28.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="390.0" layoutY="1.0" mnemonicParsing="false" onAction="#bozkaketaGorde" text="BozkaketaGorde" />
+            <Text fx:id="textuId" layoutX="96.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="puntu eman ditzakezu" />
+            <Text fx:id="zenbatId" layoutX="81.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>

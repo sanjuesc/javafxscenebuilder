@@ -92,7 +92,7 @@ public class Main extends Application {
     stage.show();
 
   }
-  public void BozkatuduErakutsi(Herrialde herrialdea) {
+  public void BozkatuduErakutsi(Herrialde herrialdea) throws SQLException {
     bozkatuduKud.setHerrialdeIzena(herrialdea);
     stage.setScene(bozkatuduScene);
     stage.show();
