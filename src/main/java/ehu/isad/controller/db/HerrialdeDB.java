@@ -32,8 +32,9 @@ public class HerrialdeDB {
                 String izena = rs.getString("herrialdea");
                 String artista = rs.getString("artista");
                 String abestia = rs.getString("abestia");
+                //String bandera = rs.getString("bandera");
                 Integer puntuak = rs.getInt("puntuak");
-                Herrialde herrialde = new Herrialde(izena, artista, abestia,puntuak);
+                Herrialde herrialde = new Herrialde(izena, artista, abestia,puntuak,izena.toLowerCase());
                 emaitza.add(herrialde);
             }
         }catch (SQLException | IOException e){

@@ -1,6 +1,7 @@
 package ehu.isad.model;
 
 import ehu.isad.Utils.Utils;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.Properties;
 import java.io.IOException;
@@ -11,7 +12,16 @@ public class Herrialde {
     private String artista;
     private String abestia;
     private int puntuazioa;
-    private ImageView bandera;
+
+    public Image getBandera() {
+        return bandera;
+    }
+
+    public void setBandera(Image bandera) {
+        this.bandera = bandera;
+    }
+
+    private Image bandera;
     private int jasotakoPunt;
 
     public String getIzena() {
@@ -55,13 +65,14 @@ public class Herrialde {
     }
 
 
-    public Herrialde(String pIzena, String pArtista, String pAbestia, int pPuntuazioa) throws IOException {
+    public Herrialde(String pIzena, String pArtista, String pAbestia, int pPuntuazioa, String path) throws IOException {
         Properties properties = Utils.lortuEzarpenak();
         izena=pIzena;
         artista=pArtista;
         abestia=pAbestia;
         puntuazioa=pPuntuazioa;
         jasotakoPunt=0;
+        bandera= new Image(path+".png");
     }
     @Override
     public String toString(){

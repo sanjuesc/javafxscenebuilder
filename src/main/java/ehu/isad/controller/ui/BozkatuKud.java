@@ -10,11 +10,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
@@ -38,7 +40,7 @@ public class BozkatuKud {
     private TableColumn<Herrialde, String> Puntuak;
 
     @FXML
-    private TableColumn<Herrialde, ImageView> argazkiId;
+    private TableColumn<Herrialde, Image> argazkiId;
 
     private int ematekoPuntuak;
     private Main main;
@@ -98,7 +100,24 @@ public class BozkatuKud {
 
 
         });
-        //argazkiId.setCellValueFactory(new PropertyValueFactory<>("bandera"));
+        argazkiId.setCellValueFactory(new PropertyValueFactory<Herrialde, Image>("bandera"));
+
+        argazkiId.setCellFactory(p -> new TableCell<>() {
+            public void updateItem(Image image, boolean empty) {
+                if (image != null && !empty){
+                    final ImageView imageview = new ImageView();
+                    imageview.setFitHeight(50);
+                    imageview.setFitWidth(50);
+                    imageview.setImage(image);
+                    setGraphic(imageview);
+                    setAlignment(Pos.CENTER);
+                    // tbData.refresh();
+                }else{
+                    setGraphic(null);
+                    setText(null);
+                }
+            };
+        });
     }
 
     public void setHerrialdeak(ObservableList<Herrialde> pLista, Herrialde pHerrialde){
