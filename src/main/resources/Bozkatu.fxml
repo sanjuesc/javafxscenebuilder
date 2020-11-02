@@ -26,7 +26,7 @@
       <AnchorPane prefHeight="28.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Button layoutX="390.0" layoutY="1.0" mnemonicParsing="false" onAction="#bozkaketaGorde" text="BozkaketaGorde" />
-            <Text fx:id="textuId" layoutX="96.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="puntu eman ditzakezu" />
+            <Text fx:id="textuId" layoutX="96.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="puntu gehiago eman ditzakezu" />
             <Text fx:id="zenbatId" layoutX="81.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" />
          </children>
       </AnchorPane>

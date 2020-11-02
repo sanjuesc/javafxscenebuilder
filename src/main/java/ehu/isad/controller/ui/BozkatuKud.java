@@ -106,8 +106,8 @@ public class BozkatuKud {
             public void updateItem(Image image, boolean empty) {
                 if (image != null && !empty){
                     final ImageView imageview = new ImageView();
-                    imageview.setFitHeight(50);
-                    imageview.setFitWidth(50);
+                    imageview.setFitHeight(12);
+                    imageview.setFitWidth(20);
                     imageview.setImage(image);
                     setGraphic(imageview);
                     setAlignment(Pos.CENTER);
