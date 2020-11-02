@@ -5,16 +5,19 @@ import java.util.ResourceBundle;
 
 import ehu.isad.Main;
 import ehu.isad.model.Herrialde;
+import ehu.isad.model.StudentsModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 
 public class BozkatuKud {
@@ -61,7 +64,28 @@ public class BozkatuKud {
         Abestia.setCellValueFactory(new PropertyValueFactory<>("abestia"));
         Puntuak.setCellValueFactory(c-> new SimpleStringProperty(String.valueOf(c.getValue().getJasotakoPunt())));
 
-        Puntuak.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        Callback<TableColumn<Herrialde, String>, TableCell<Herrialde, String>> defaultTextFieldCellFactory
+                = TextFieldTableCell.<Herrialde>forTableColumn();
+
+        Puntuak.setCellFactory(col -> {
+            TableCell<Herrialde, String> cell = defaultTextFieldCellFactory.call(col);
+
+            cell.setOnMouseClicked(event -> {
+                if (! cell.isEmpty()) {
+                    if (cell.getTableView().getSelectionModel().getSelectedItem().getIzena().equals(nork.getIzena())) {
+                        cell.setEditable(false); //deshabilitar una
+                    }else {
+                        cell.setEditable(true);
+                    }
+                }
+            });
+
+            return cell ;
+        });
+
+
+
         Puntuak.setOnEditCommit(data -> {
             Integer zenbat = 0;
             if(!data.getNewValue().equals("")&& Integer.parseInt(data.getNewValue())<=(ematekoPuntuak+data.getRowValue().getJasotakoPunt())){
