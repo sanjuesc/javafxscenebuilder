@@ -25,16 +25,19 @@ public class HerrialdeDB {
         List<Herrialde> emaitza = new ArrayList<>();
         DBKudeatzaile dbkud = DBKudeatzaile.getInstantzia();
 
-        String query = "select herrialdea, artista, abestia, puntuak from Ordezkaritza JOIN ParteHartzea on ParteHartzea.izena=Ordezkaritza.herrialdea where ParteHartzea.urtea = strftime('%Y', 'now') and etorrikoDa='Bai'";
+        String query = "select herrialdea, artista, abestia, puntuak,bandera from Ordezkaritza\n" +
+                " JOIN ParteHartzea on ParteHartzea.izena=Ordezkaritza.herrialdea\n" +
+                " JOIN Herrialde on Herrialde.izena=Ordezkaritza.herrialdea\n" +
+                " where ParteHartzea.urtea = strftime('%Y', 'now') and etorrikoDa='Bai'";
         ResultSet rs = dbkud.execSQL(query);
         try {
             while (rs.next()) {
                 String izena = rs.getString("herrialdea");
                 String artista = rs.getString("artista");
                 String abestia = rs.getString("abestia");
-                //String bandera = rs.getString("bandera");
+                String bandera = rs.getString("bandera");
                 Integer puntuak = rs.getInt("puntuak");
-                Herrialde herrialde = new Herrialde(izena, artista, abestia,puntuak,izena.toLowerCase());
+                Herrialde herrialde = new Herrialde(izena, artista, abestia,puntuak,bandera);
                 emaitza.add(herrialde);
             }
         }catch (SQLException | IOException e){
