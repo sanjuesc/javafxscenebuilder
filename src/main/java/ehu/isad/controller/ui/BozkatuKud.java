@@ -55,7 +55,14 @@ public class BozkatuKud {
 
     @FXML
     void bozkaketaGorde(ActionEvent event) {
-
+        Herrialde[] herriak = tbData.getItems().toArray(new Herrialde[0]);
+        int i = 0;
+        while(i<herriak.length){
+            if(!herriak[i].getIzena().equals(nork.getIzena()))
+            herriak[i].puntuazioEguneratu(nork);
+            i++;
+        }
+        main.topErakutsi();
     }
 
     @FXML

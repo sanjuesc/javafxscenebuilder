@@ -58,9 +58,15 @@ public class HerrialdeDB {
         return rs.next(); //elementuren bat badago, orduan bozkatu egin du jadanik
     }
 
-    public void bozkatu(Herrialde pHerri, Integer pPuntuak) {
+    public void bozkatu(Herrialde nork, Herrialde nori) {
         DBKudeatzaile dbkud = DBKudeatzaile.getInstantzia();
-        //dbkud.execSQL("INSERT INTO properties ('userid', 'key', 'value') values ('5','6','7')");
-
+        int puntuBerriak = 0;
+        puntuBerriak=nori.getJasotakoPunt()+nori.getPuntuazioa();
+        String bozkaketaQuery= "insert into Bozkaketa values ('"+nori.getIzena()+"', '"+nork.getIzena()+"',strftime('%Y', 'now'),"+nori.getJasotakoPunt() +")";
+        System.out.println(bozkaketaQuery);
+        String updateQuery= "UPDATE Ordezkaritza SET puntuak="+nori.getJasotakoPunt()+" WHERE herrialdea='"+nori.getIzena()+"'";
+        System.out.println(updateQuery);
+        dbkud.execSQL(bozkaketaQuery);
+        dbkud.execSQL(updateQuery);
     }
 }

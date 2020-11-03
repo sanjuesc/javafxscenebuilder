@@ -1,6 +1,7 @@
 package ehu.isad.model;
 
 import ehu.isad.Utils.Utils;
+import ehu.isad.controller.db.HerrialdeDB;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.Properties;
@@ -79,4 +80,8 @@ public class Herrialde {
         return izena;
     }
 
+    public void puntuazioEguneratu(Herrialde bozkatuDio) {
+        HerrialdeDB herriDB = HerrialdeDB.getInstantzia();
+        herriDB.bozkatu(bozkatuDio, this);
+    }
 }
