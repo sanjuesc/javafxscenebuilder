@@ -25,6 +25,12 @@ import javafx.util.Callback;
 public class BozkatuKud {
 
     @FXML
+    private ImageView bandera;
+
+    @FXML
+    private ImageView eurovision;
+
+    @FXML
     private TableView<Herrialde> tbData;
 
     @FXML
@@ -67,6 +73,8 @@ public class BozkatuKud {
 
     @FXML
     void initialize() {
+        Image euroImage = new Image("/eurovision.png");
+        eurovision.setImage(euroImage);
         tbData.setEditable(true);
         Herrialdea.setCellValueFactory(new PropertyValueFactory<>("izena"));
         Artista.setCellValueFactory(new PropertyValueFactory<>("artista"));
@@ -133,6 +141,8 @@ public class BozkatuKud {
         nork=pHerrialde;
         herrialdeak=pLista;
         tbData.setItems(herrialdeak);
+        Image banderaImage = new Image("/bihotz"+nork.getIzena().toLowerCase()+".png");
+        bandera.setImage(banderaImage);
 
     }
 

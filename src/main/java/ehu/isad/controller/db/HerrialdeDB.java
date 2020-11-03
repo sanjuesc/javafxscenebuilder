@@ -32,7 +32,6 @@ public class HerrialdeDB {
                 " JOIN ParteHartzea on ParteHartzea.izena=Ordezkaritza.herrialdea\n" +
                 " JOIN Herrialde on Herrialde.izena=Ordezkaritza.herrialdea\n" +
                 " where ParteHartzea.urtea = strftime('%Y', 'now') and Ordezkaritza.urtea =strftime('%Y','now') and etorrikoDa='Bai'";
-        System.out.println(query);
         ResultSet rs = dbkud.execSQL(query);
         try {
             while (rs.next()) {
@@ -41,12 +40,6 @@ public class HerrialdeDB {
                 String abestia = rs.getString("abestia");
                 String bandera = rs.getString("bandera");
                 Integer puntuak = rs.getInt("puntuak");
-                //String puntuakQuery= "select puntuak from Ordezkaritza where urtea= strftime('%Y', 'now') and herrialdea = '"+izena+"'";
-                //ResultSet puntuakLortuJadanik= dbkud.execSQL(puntuakQuery);
-                //int puntuak=0;
-                //if(puntuakLortuJadanik.next()){
-                //    puntuak=puntuakLortuJadanik.getInt("puntuak");
-                //}
                 Herrialde herrialde = new Herrialde(izena, artista, abestia,puntuak, bandera);
                 emaitza.add(herrialde);
             }
@@ -63,7 +56,6 @@ public class HerrialdeDB {
         DBKudeatzaile dbkud = DBKudeatzaile.getInstantzia();
 
         String query = "select puntuak from Bozkaketa INNER JOIN ParteHartzea on Bozkaketa.bozkatuDu=ParteHartzea.izena where ParteHartzea.urtea = strftime('%Y', 'now') and ParteHartzea.urtea=Bozkaketa.urtea and  etorrikoDa='Bai' and izena='"+herri.getIzena()+"'";
-        System.out.println(query);
         ResultSet rs = dbkud.execSQL(query);
         return rs.next(); //elementuren bat badago, orduan bozkatu egin du jadanik
     }
