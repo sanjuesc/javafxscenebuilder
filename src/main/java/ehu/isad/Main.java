@@ -90,11 +90,15 @@ public class Main extends Application {
     bozkatuKud.setHerrialdeak(herrialdeak, nork);
     stage.setScene(bozkatuScene);
     stage.show();
-
   }
   public void BozkatuduErakutsi(Herrialde herrialdea) throws SQLException {
     bozkatuduKud.setHerrialdeIzena(herrialdea);
     stage.setScene(bozkatuduScene);
+    stage.show();
+  }
+
+  public void mainErakutsi(){
+    stage.setScene(nagusiaScene);
     stage.show();
   }
 

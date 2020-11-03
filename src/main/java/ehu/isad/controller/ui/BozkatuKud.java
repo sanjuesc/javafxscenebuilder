@@ -62,7 +62,7 @@ public class BozkatuKud {
             herriak[i].puntuazioEguneratu(nork);
             i++;
         }
-        main.topErakutsi();
+        main.mainErakutsi();
     }
 
     @FXML
