@@ -13,6 +13,8 @@ public class Herrialde {
     private String artista;
     private String abestia;
     private int puntuazioa;
+    private Image bandera;
+    private int jasotakoPunt;
 
     public Image getBandera() {
         return bandera;
@@ -21,9 +23,6 @@ public class Herrialde {
     public void setBandera(Image bandera) {
         this.bandera = bandera;
     }
-
-    private Image bandera;
-    private int jasotakoPunt;
 
     public String getIzena() {
         return izena;

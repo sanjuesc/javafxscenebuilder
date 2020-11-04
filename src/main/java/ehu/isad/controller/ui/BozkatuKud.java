@@ -1,12 +1,9 @@
 package ehu.isad.controller.ui;
 
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 import ehu.isad.Main;
 import ehu.isad.model.Herrialde;
-import ehu.isad.model.StudentsModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
