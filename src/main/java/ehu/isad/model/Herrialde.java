@@ -73,7 +73,7 @@ public class Herrialde {
         abestia=pAbestia;
         puntuazioa=pPuntuazioa;
         jasotakoPunt=0;
-        bandera= new Image(path+".png");
+        bandera= new Image("/bandera/"+path+".png");
     }
     @Override
     public String toString(){

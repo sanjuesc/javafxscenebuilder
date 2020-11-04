@@ -40,7 +40,7 @@ public class bozkatuDuKud implements Initializable {
 
     public void setHerrialdeIzena(Herrialde herrialdea) throws SQLException {
         String banderaIzena=BozkatuDuDB.getInstantzia().lortuBandera(herrialdea);
-        Image banderaImage= new Image("/bihotz"+banderaIzena+".png");
+        Image banderaImage= new Image("/bihotz/"+banderaIzena+".png");
         banderaBihotz.setImage(banderaImage);
         textId.setText(herrialdea.getIzena()+ "k jada banatu ditu bere puntuak");
 

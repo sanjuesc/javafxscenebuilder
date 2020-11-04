@@ -68,4 +68,31 @@ public class HerrialdeDB {
         dbkud.execSQL(updateQuery);
         dbkud.execSQL(bozkaketaQuery);
     }
+
+    public List<Herrialde> lortuTop(){
+        List<Herrialde> emaitza = new ArrayList<>();
+        DBKudeatzaile dbkud = DBKudeatzaile.getInstantzia();
+
+        String query = "select herrialdea,bandera, abestia, artista, puntuak from Ordezkaritza JOIN " +
+                "ParteHartzea on ParteHartzea.izena=Ordezkaritza.herrialdea JOIN Herrialde " +
+                "on Herrialde.izena=Ordezkaritza.herrialdea where ParteHartzea.urtea = strftime('%Y', 'now') " +
+                "and Ordezkaritza.urtea =strftime('%Y','now') and etorrikoDa='Bai' order by puntuak desc LIMIT 3";
+        ResultSet rs = dbkud.execSQL(query);
+        try {
+            while (rs.next()) {
+                String izena = rs.getString("herrialdea");
+                String bandera = rs.getString("bandera");
+                Integer puntuak = rs.getInt("puntuak");
+                String abestia = rs.getString("abestia");
+                String artista = rs.getString("artista");
+                Herrialde herrialde = new Herrialde(izena,artista, abestia,puntuak, bandera);
+                emaitza.add(herrialde);
+            }
+        }catch (SQLException | IOException e){
+            System.err.println(e);
+        }
+
+
+        return emaitza;
+    }
 }

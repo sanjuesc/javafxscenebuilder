@@ -1,8 +1,10 @@
 package ehu.isad;
 
+import ehu.isad.controller.db.HerrialdeDB;
 import ehu.isad.controller.ui.*;
 import ehu.isad.model.Herrialde;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +20,7 @@ public class Main extends Application {
   private Parent herrialdeUI;
   private Parent bozkatuUI;
   private Parent bozkatuDuUI;
+  private Parent top3UI;
 
 
   private Stage stage;
@@ -26,11 +29,13 @@ public class Main extends Application {
   private HerrialdeKud herrialdeKud;
   private BozkatuKud bozkatuKud;
   private bozkatuDuKud bozkatuduKud;
+  private top3Kud top3Kud;
 
   private Scene nagusiaScene;
   private Scene herrialdeScene;
   private Scene bozkatuScene;
   private Scene bozkatuduScene;
+  private Scene top3Scene;
 
 
 
@@ -44,7 +49,7 @@ public class Main extends Application {
     herrialdeScene = new Scene(herrialdeUI,600,400);
     bozkatuScene = new Scene(bozkatuUI,600,400);
     bozkatuduScene = new Scene(bozkatuDuUI,600,400);
-
+    top3Scene = new Scene(top3UI,600,474);
 
 
     stage.setTitle("Eurobisioa");
@@ -73,6 +78,11 @@ public class Main extends Application {
     bozkatuDuUI = (Parent) loaderBozkatuDu.load();
     bozkatuduKud = loaderBozkatuDu.getController();
     bozkatuduKud.setMainApp(this);
+
+    FXMLLoader loaderTop3 = new FXMLLoader(getClass().getResource("/Top3.fxml"));
+    top3UI = (Parent) loaderTop3.load();
+    top3Kud = loaderTop3.getController();
+    top3Kud.setMainApp(this);
   }
 
 
@@ -102,6 +112,10 @@ public class Main extends Application {
     stage.show();
   }
 
-  public void topErakutsi() {
+  public void top3Erakutsi() throws SQLException {
+    FXCollections.observableArrayList();
+    top3Kud.setHerrialdeak();
+    stage.setScene(top3Scene);
+    stage.show();
   }
 }

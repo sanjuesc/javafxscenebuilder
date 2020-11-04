@@ -1,6 +1,7 @@
 package ehu.isad.controller.ui;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import ehu.isad.Main;
@@ -60,7 +61,7 @@ public class BozkatuKud {
     private Text zenbatId;
 
     @FXML
-    void bozkaketaGorde(ActionEvent event) {
+    void bozkaketaGorde(ActionEvent event) throws SQLException {
         Herrialde[] herriak = tbData.getItems().toArray(new Herrialde[0]);
         int i = 0;
         while(i<herriak.length){
@@ -68,7 +69,7 @@ public class BozkatuKud {
             herriak[i].puntuazioEguneratu(nork);
             i++;
         }
-        main.mainErakutsi();
+        main.top3Erakutsi();
     }
 
     @FXML
@@ -141,7 +142,7 @@ public class BozkatuKud {
         nork=pHerrialde;
         herrialdeak=pLista;
         tbData.setItems(herrialdeak);
-        Image banderaImage = new Image("/bihotz"+nork.getIzena().toLowerCase()+".png");
+        Image banderaImage = new Image("/bihotz/"+nork.getIzena().toLowerCase()+".png");
         bandera.setImage(banderaImage);
 
     }
